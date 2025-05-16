@@ -1,10 +1,6 @@
 vim.opt.number = true
 vim.opt.relativenumber = true
 
--- disable netrw at the very start of your init.lua, this is for treesitter
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -26,24 +22,11 @@ vim.opt.rtp:prepend(lazypath)
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.maplocalleader = " "
 
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
-    -- add your plugins here
- -- treesitter
-{
-  "nvim-tree/nvim-tree.lua",
-  version = "*",
-  lazy = false,
-  dependencies = {
-    "nvim-tree/nvim-web-devicons",
-  },
-  config = function()
-    require("nvim-tree").setup {}
-  end,
-}
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
@@ -52,6 +35,4 @@ require("lazy").setup({
   checker = { enabled = true },
 })
 
--- Open Nvim Tree in a new tab
-vim.api.nvim_set_keymap('n', '<leader>nt', ':tabnew<CR>:NvimTreeToggle<CR>', { noremap = true, silent = true })
 
